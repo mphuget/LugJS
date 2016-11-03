@@ -1,0 +1,31 @@
+{
+  "name": "lugjs",
+  "version": "0.0.1",
+  "description": "Open source Node.js powered e-/m-Commerce platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mphuget/LugJS.git"
+  },
+  "keywords": [
+    "Node.js",
+    "eCommerce",
+    "mCommerce",
+    "MEAN"
+  ],
+  "author": "Marc-Philippe Huget",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mphuget/LugJS/issues"
+  },
+  "homepage": "https://github.com/mphuget/LugJS#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  }
+}

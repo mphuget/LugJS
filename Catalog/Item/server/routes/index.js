@@ -42,8 +42,43 @@ router.put('/catalog/item', function(req, res) {
 });
 
 //delete an item from a category
-router.delete('/catalog/item/:item', function(req, res) {
+router.delete('/catalog/item/:id', function(req, res) {
   enquiries.deleteItem(req, res);
+});
+
+//retrieve an item from a category from a department
+router.get('/catalog/item/:id', function(req, res) {
+  enquiries.getItem(req, res);
+});
+
+//add quantity to an item
+router.post('/catalog/item/quantity', function(req, res) {
+  enquiries.updateQuantity(req, res);
+});
+
+//set visible an item
+router.post('/catalog/item/visible', function(req, res) {
+  enquiries.setVisible(req, res);
+});
+
+//set invisible an item
+router.post('/catalog/item/invisible', function(req, res) {
+  enquiries.setInvisible(req, res);
+});
+
+//add an extra on an item
+router.post('/catalog/item/extra', function(req, res) {
+  enquiries.addExtra(req, res);
+});
+
+//update an extra of an item
+router.put('/catalog/item/extra', function(req, res) {
+  enquiries.updateExtra(req, res);
+});
+
+//delete an extra of an item
+router.delete('/catalog/item/extra', function(req, res) {
+  enquiries.deleteExtra(req, res);
 });
 
 module.exports = router;

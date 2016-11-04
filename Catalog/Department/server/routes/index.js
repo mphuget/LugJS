@@ -28,27 +28,37 @@ var enquiries = require('../controllers');
 
 //add a new department
 router.post('/catalog/department/', function(req, res) {
-  res.send('POST /catalog/department/');
+  enquiries.addDepartment(req, res);
 });
 
 //retrieve a department
 router.get('/catalog/department/:dept', function(req, res) {
-  res.send('GET /catalog/department/:dept');
+  enquiries.getDepartment(req, res);
 });
 
 //update a department
 router.put('/catalog/department/', function(req, res) {
-  res.send('PUT /catalog/department/');
+  enquiries.updateDepartment(req, res);
 });
 
 //delete a department
-router.delete('/catalog/department/:dept', function(req, res) {
-  res.send('DELETE /catalog/department/:dept');
+router.delete('/catalog/department/', function(req, res) {
+  enquiries.deleteDepartment(req, res);
 });
 
 //retrieve all the departments
 router.get('/catalog/departments/', function(req, res) {
-  res.send('GET /catalog/departments/');
+  enquiries.getDepartments(req, res);
+});
+
+//set visible a department
+router.post('/catalog/department/visible', function(req, res) {
+  enquiries.setVisible(req, res);
+});
+
+//set invisible a department
+router.post('/catalog/department/invisible', function(req, res) {
+  enquiries.setInvisible(req, res);
 });
 
 module.exports = router;

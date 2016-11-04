@@ -35,7 +35,24 @@ var bodyParser = require('body-parser');
 //contains the Node configuration
 var config = require('./Core/server/config/config_server');
 
+//contains the database configuration
+var database = require('./Core/server/config/config_database');
+
+//to access the database
+var mongoose = require('mongoose');
+
 var app = express();
+
+//connects to the MongoDB database
+//connect to the database
+mongoose.connect(database.url, function(err) {
+  if (err) {
+    console.log(err);
+  }
+  else {
+    console.log("Connected to the database Lug");
+  }
+});
 
 //express logs via morgan
 if (app.get('env') == 'production') {

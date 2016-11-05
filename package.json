@@ -1,6 +1,6 @@
 {
   "name": "lugjs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Open source Node.js powered e-/m-Commerce platform",
   "main": "index.js",
   "scripts": {

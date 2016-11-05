@@ -31,6 +31,11 @@ var extraSchema = new Schema({
 
 });
 
+var ImageSchema = new Schema({
+      fileName: String,
+      url: String
+});
+
 var ItemSchema = new Schema({
 
   department : String,
@@ -42,6 +47,7 @@ var ItemSchema = new Schema({
   seller : String,
   quantity : Number,
   extra : [extraSchema],
+  pictures : [ImageSchema],
   visible : Boolean
 
 });

@@ -41,6 +41,9 @@ var database = require('./Core/server/config/config_database');
 //to access the database
 var mongoose = require('mongoose');
 
+//middleware to handle HTTP 404
+var errorHandlers = require('./Core/server/middleware/errorhandlers');
+
 var app = express();
 
 //connects to the MongoDB database
@@ -71,6 +74,15 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+//define the different directories where views are
+//and set EJS as template engine
+var dirViews = [path.join(__dirname, '/Core/server/views'),
+                path.join(__dirname, '/Department/server/views'),
+                path.join(__dirname, '/Category/server/views'),
+                path.join(__dirname, '/Item/server/views'),];
+app.set('views', dirViews);
+app.set('view engine', 'ejs');
+
 //serve the RESTful API
 //definition of the different routes
 //RESTful API
@@ -82,6 +94,9 @@ app.use(CategoryRoutes);
 
 var ItemRoutes = require('./Catalog/Item/server/routes');
 app.use(ItemRoutes);
+
+//serve the 404 middleware
+app.use(errorHandlers.notFound);
 
 app.listen(config.port);
 console.log('App server running on port ' + config.port);

@@ -151,6 +151,7 @@ function addExtra(req, res) {
 //update an extra for an item
 function updateExtra(req, res) {
   var Item = require('../models/item');
+
   Item.findOneAndUpdate({'extra.id' : req.body.id},
               {'$set' : {
                 'extra.$.value' : req.body.value
@@ -165,16 +166,16 @@ function updateExtra(req, res) {
 //delete an extra of an item
 function deleteExtra(req, res) {
   var Item = require('../models/item');
-  Item.update({'id' : req.body.id},
-              {'$pull' : {
-                'extra.$.key' : req.body.key
-              }}, function(err) {
-                if (err) throw err;
+  Item.findOneAndUpdate({id:req.body.id}, {
+    $pull: {
+      extra: {id: req.body.extra_id}
+    }
+  }, function(err, item) {
+    if (err) throw err;
 
-                res.send("Extra updated");
-              }
-            );
-
+    res.send(item);
+    
+  });
 }
 
 module.exports.getItems = getItems;

@@ -77,7 +77,7 @@ router.put('/catalog/item/extra', function(req, res) {
 });
 
 //delete an extra of an item
-router.delete('/catalog/item/extra', function(req, res) {
+router.delete('/catalog/extra', function(req, res) {
   enquiries.deleteExtra(req, res);
 });
 

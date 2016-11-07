@@ -1,0 +1,44 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to templating using EJS</p>
+        </div>
+
+        <h2> <%= department.name %> / <%= category.name %> </h2>
+
+        <ol>
+          <% data.forEach(function(item) { %>
+              <li>
+                <ul>
+                  <% var url = "/catalog/item/" + item.id %>
+                  <li> <a href = <%= url %>> <%= item.name %> </a></li>
+                  <li> <%= item.id %> </li>
+                  <li> <%= item.description %> </li>
+                  <li> <%= item.price %></li>
+                  <li> <%= item.seller %></li>
+                </ul>
+              </li>
+
+          <% }); %>
+        </ol>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>

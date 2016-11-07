@@ -44,6 +44,9 @@ var mongoose = require('mongoose');
 //middleware to handle HTTP 404
 var errorHandlers = require('./Core/server/middleware/errorhandlers');
 
+//to access directories
+var path = require('path');
+
 var app = express();
 
 //connects to the MongoDB database
@@ -77,9 +80,9 @@ app.use(bodyParser.json());
 //define the different directories where views are
 //and set EJS as template engine
 var dirViews = [path.join(__dirname, '/Core/server/views'),
-                path.join(__dirname, '/Department/server/views'),
-                path.join(__dirname, '/Category/server/views'),
-                path.join(__dirname, '/Item/server/views'),];
+                path.join(__dirname, '/Catalog/Department/server/views'),
+                path.join(__dirname, '/Catalog/Category/server/views'),
+                path.join(__dirname, '/Catalog/Item/server/views'),];
 app.set('views', dirViews);
 app.set('view engine', 'ejs');
 

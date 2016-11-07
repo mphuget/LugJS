@@ -26,7 +26,8 @@ function getDepartments(req, res) {
   Department.find({}, function(err, departments) {
     if (err) throw err;
 
-    res.send(departments);
+
+    res.render('pages/departments', {data : departments});
   });
 
 }

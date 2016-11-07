@@ -23,10 +23,23 @@ Author: Marc-Philippe Huget
 //get all the items from a category in a department
 function getItems(req, res) {
   var Item = require('../models/item');
-  Item.find({department: req.params.dept, category : req.params.cat}, function(err, items) {
+  var Category = require('../../../Category/server/models/category');
+  var Department = require('../../../Department/server/models/department');
+
+  Item.find({department: req.params.dept, category : req.params.cat, visible : true}, function(err, items) {
     if (err) throw err;
 
-    res.send(items);
+    Category.findById(req.params.cat, function(err, category) {
+      if (err) throw err;
+
+      Department.findById(req.params.dept, function(err, department) {
+        if (err) throw err;
+              res.render('pages/items', {department : department,
+                                         category : category,
+                                         data : items});
+
+      });
+    });
   });
 
 }
@@ -84,10 +97,22 @@ function deleteItem(req, res) {
 //get an item from its id
 function getItem(req, res) {
   var Item = require('../models/item');
+  var Category = require('../../../Category/server/models/category');
+  var Department = require('../../../Department/server/models/department');
   Item.findOne({id : req.params.id}, function(err, item) {
     if (err) throw err;
 
-    res.send("Item found: " + item);
+    Department.findById(item.department, function(err, department) {
+      if (err) throw err;
+
+      Category.findById(item.category, function(err, category) {
+        if (err) throw err;
+
+        res.render('pages/item', {department : department,
+                                  category : category,
+                                  item : item});
+      });
+    });
   });
 
 }
@@ -174,7 +199,7 @@ function deleteExtra(req, res) {
     if (err) throw err;
 
     res.send(item);
-    
+
   });
 }
 

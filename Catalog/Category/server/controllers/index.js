@@ -24,10 +24,19 @@ Author: Marc-Philippe Huget
 //the department is provided as parameters
 function getCategories(req, res) {
   var Category = require('../models/category');
+  var Department = require('../../../Department/server/models/department');
+
   Category.find({department: req.params.dept}, function(err, categories) {
+
     if (err) throw err;
 
-    res.send(categories);
+    Department.findById(req.params.dept, function(err, department) {
+
+      if (err) throw err;
+
+      res.render('pages/department', {name: department.name,
+                                      data : categories});
+    });
   });
 
 }

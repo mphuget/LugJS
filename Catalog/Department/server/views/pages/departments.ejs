@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../../../../../Core/server/views/partials/header %>
+    <%- include ../../../../../Core/server/views/partials/header %>
 </head>
 <body class="container">
 
@@ -14,7 +14,7 @@
     <main>
         <div class="jumbotron">
             <h1>This is great</h1>
-            <p>Welcome to templating using EJS</p>
+            <p>Welcome to <%= store.title %></p>
         </div>
 
         <h2> Departments </h2>

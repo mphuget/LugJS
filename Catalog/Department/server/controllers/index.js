@@ -23,11 +23,16 @@ Author: Marc-Philippe Huget
 //get all the departments for a store
 function getDepartments(req, res) {
   var Department = require('../models/department');
+  var Store = require('../../../../Store/server/models/store');
   Department.find({}, function(err, departments) {
     if (err) throw err;
 
+    Store.findOne({id: '1'}, function(err, store) {
+      if (err) throw err;
 
-    res.render('pages/departments', {data : departments});
+      res.render('pages/departments', {data : departments, store : store});
+    });
+
   });
 
 }

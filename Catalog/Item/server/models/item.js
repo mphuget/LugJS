@@ -48,7 +48,8 @@ var ItemSchema = new Schema({
   quantity : Number,
   extra : [extraSchema],
   pictures : [ImageSchema],
-  visible : Boolean
+  visible : Boolean,
+  store : String
 
 });
 

@@ -47,6 +47,18 @@ var errorHandlers = require('./Core/server/middleware/errorhandlers');
 //to access directories
 var path = require('path');
 
+//used to reduce response body
+var compression = require('compression');
+
+var session = require('express-session');
+var MongoStore = require('connect-mongo/es5')(session);
+var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
+
+//used for authentication with email or via social network
+var passport = require('passport');
+var localPassport = require('./UserManagement/server/config/local-passport');
+
 var app = express();
 
 //connects to the MongoDB database
@@ -67,8 +79,14 @@ if (app.get('env') == 'production') {
   app.use(morgan('dev'));
 }
 
+//compress response body for better performance
+app.use(compression());
+
 //disable headers indicating pages are coming from an Express server
 app.disable('x-powered-by');
+
+//cookie setting
+app.use(cookieParser(config.cookieKey));
 
 //used to fetch the data from forms on HTTP POST
 app.use(bodyParser.urlencoded({
@@ -82,9 +100,25 @@ app.use(bodyParser.json());
 var dirViews = [path.join(__dirname, '/Core/server/views'),
                 path.join(__dirname, '/Catalog/Department/server/views'),
                 path.join(__dirname, '/Catalog/Category/server/views'),
-                path.join(__dirname, '/Catalog/Item/server/views'),];
+                path.join(__dirname, '/Catalog/Item/server/views'),
+                path.join(__dirname, '/UserManagement/server/views')];
 app.set('views', dirViews);
 app.set('view engine', 'ejs');
+
+//setting session
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'mySecretKey',
+  store: new MongoStore({ url: database.url, autoReconnect: true})
+}));
+
+// use connect-flash for flash messages stored in session
+app.use(flash());
+
+//use passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //serve the RESTful API
 //definition of the different routes
@@ -97,6 +131,9 @@ app.use(CategoryRoutes);
 
 var ItemRoutes = require('./Catalog/Item/server/routes');
 app.use(ItemRoutes);
+
+var UserManagementRoutes = require('./UserManagement/server/routes');
+app.use(UserManagementRoutes);
 
 //serve the 404 middleware
 app.use(errorHandlers.notFound);

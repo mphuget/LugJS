@@ -28,7 +28,8 @@ var CategorySchema = new Schema({
 
   name : String,
   department: String,
-  visible : Boolean
+  visible : Boolean,
+  store : String
 
 });
 

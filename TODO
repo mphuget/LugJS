@@ -3,11 +3,11 @@ Date: 2016/11/08
 List of tasks to do on LugJS:
 * Merge the different head.js into a unique file located in Core (DONE)
 * Merge the different footer.js into a unique file located in Core (DONE)
-* Change the menu in the head.js
+* Change the menu in the head.js (DONE)
 * Change the content in the footer.js (DONE)
-* Create a Store document containing at least the name of the Store
-* Update Department, Category, Item to be part of a Store, add the id
-* Create the model of a User (part of the admin)
+* Create a Store document containing at least the name of the Store (DONE)
+* Update Department, Category, Item to be part of a Store, add the id (DONE)
+* Create the model of a User (part of the admin) (DONE)
 * Create the route for managing users in the Admin part
 * Add the controller for managing users
 * Create the different views for sign up, logout, lost password, reset password

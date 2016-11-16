@@ -25,4 +25,7 @@ module.exports = {
 	//or if we set the PORT variable on the command line
 	port : process.env.PORT || 3000,
 
+	//key to encrypt cookies
+	cookieKey : 'b3aut1ful'
+
 }

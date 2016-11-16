@@ -27,7 +27,8 @@ var Schema = mongoose.Schema;
 var DepartmentSchema = new Schema({
 
   name : String,
-  visible : Boolean
+  visible : Boolean,
+  store : String
 
 });
 

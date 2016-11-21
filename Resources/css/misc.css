@@ -1,0 +1,13 @@
+/* used in 404.ejs */
+.centeredImage {
+  display : block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* used in 404.ejs */
+.centeredText {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}

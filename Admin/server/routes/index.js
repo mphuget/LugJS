@@ -26,8 +26,10 @@ var router = require('express').Router();
 
 var signup = require('../controllers/signup');
 var signin = require('../controllers/signin');
+var signout = require('../controllers/signout');
 
 var passport = require('passport');
+var local = require('../config/local-passport');
 
 //provide the signup form
 router.get('/admin/signup', function(req, res) {
@@ -43,12 +45,26 @@ router.post('/admin/signup', function(req, res) {
 
 });
 
+//signout
+router.get('/admin/signout', function(req, res) {
+
+    signout.signout(req, res);
+});
+
 //user profile
-router.get('/admin/profile', function(req, res) {
+router.get('/admin/profile', local.isAuthenticated, function(req, res) {
 
   signup.profile(req, res);
 
 });
+
+// router.get('/admin/test', function(req, res) {
+//   res.send("Test unprotected");
+// });
+//
+// router.get('/admin/ptest', local.isAuthenticated, function(req, res) {
+//   res.send("Test protected");
+// });
 
 //sign in
 router.get('/admin/signin', function(req, res) {

@@ -19,16 +19,32 @@ The project is located at: https://github.com/mphuget/LugJS
 
 Author: Marc-Philippe Huget
 */
-//errorhandlers.js
-//Really simple middleware to deal with HTTP 404
-exports.notFound = function notFound(req, res, next){
-	var Store = require('../../../Store/server/models/store');
+//setting the strict mode while checking Javascript
+'use strict';
 
-	Store.findOne({id: '1'}, function(err, store) {
-		if (err) throw err;
+var router = require('express').Router();
 
-		res.status(404);
-		res.render('../views/pages/404', {store : store});
+var core = require('../controllers');
 
-	});
-};
+//provide the home page
+router.get('/', function(req, res) {
+
+  core.home(req, res);
+
+});
+
+//provide the about page
+router.get('/about', function(req, res) {
+
+  core.about(req, res);
+
+});
+
+//provide the contact page
+router.get('/contact', function(req, res) {
+
+  core.contact(req, res);
+
+});
+
+module.exports = router;

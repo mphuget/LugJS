@@ -4,18 +4,14 @@
   <div class="row">
     <div class="col-sm-4" style="background-color:black;color:white">Social
          <ul>
-           <li> Twitter </li>
-           <li> Facebook </li>
-           <li> Instagram </li>
-           <li> Google+ </li>
-           <li> Snapchat </li>
+           <li> <a href="https://twitter.com/<%=store.twitter%>" class="twitter-follow-button" data-show-count="false">Follow <%= store.twitter %></a></li>
+           <li> <%= store.facebook %> </li>
+           <li> <%= store.instagram %> </li>
          </ul>
 </div>
     <div class="col-sm-4" style="background-color:black;color:white">About us
        <ul>
            <li>About us</li>
-           <li>Our philosophy </li>
-           <li>Team </li>
            <li>Media </li>
            <li>Customer inquiries</li>
 
@@ -24,12 +20,12 @@
     <div class="col-sm-4" style="background-color:black;color:white">Contact
        <ul>
 
-         <li> 4, Terminal Blvd </li>
-         <li> Mountain View </li>
-         <li> CA 94040 </li>
-         <li> United States </li>
-         <li> +1 555 555</li>
+         <li> <%= store.address %> </li>
+         <li> <%= store.phone %> </li>
+         <li> <%= store.email %> </li>
       <ul>
 </div>
   </div>
 </div>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

@@ -28,11 +28,14 @@ var StoreSchema = new Schema({
 
   id : String,
   title : String,
+  about : String,
+  company : String,
+  address : String,
+  phone : String,
   facebook : String,
   twitter : String,
   instagram : String,
-  googleplus : String,
-  snapchat : String
+  email : String,
 });
 
 

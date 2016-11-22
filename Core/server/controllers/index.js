@@ -54,6 +54,8 @@ function about(req, res) {
     if (err)
       throw err;
 
+      console.log(store);
+
     res.render('../views/pages/about', {store : store});
 
   });

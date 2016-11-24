@@ -64,11 +64,18 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var localPassport = require('./Admin/server/config/local-passport');
 
+//set for internationalization
+var configLang = {
+    "lang": "en",
+    "langFile": __dirname + "/locales/locale.json"
+}
+
+global.i18n = require('i18n-nodejs')(configLang.lang, configLang.langFile);
+
 //start an express on Node
 var app = express();
 
 //connects to the MongoDB database
-//connect to the database
 mongoose.connect(database.url, function(err) {
 
   if (err) {

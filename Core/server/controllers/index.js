@@ -34,6 +34,8 @@ function home(req, res) {
     if (err)
       throw err;
 
+      console.log(i18n.__('About'));
+
     res.render('../views/pages/home', {store : store});
 
   });
@@ -54,9 +56,7 @@ function about(req, res) {
     if (err)
       throw err;
 
-      console.log(store);
-
-    res.render('../views/pages/about', {store : store});
+    res.render('../views/pages/about', {store : store, i18n: res});
 
   });
 
@@ -76,7 +76,7 @@ function contact(req, res) {
     if (err)
       throw err;
 
-    res.render('../views/pages/contact', {store : store});
+    res.render('../views/pages/contact', {store : store, i18n: res});
 
   });
 

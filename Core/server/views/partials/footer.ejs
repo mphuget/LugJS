@@ -1,24 +1,34 @@
 <!-- views/partials/footer.ejs -->
 <!-- views/partials/footer.ejs -->
-<div class="container-fluid">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=260043014188461";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="container-fluid" style="height:auto">
   <div class="row">
-    <div class="col-sm-4" style="background-color:black;color:white">Social
-         <ul>
+    <div class="col-sm-4" style="background-color:black;color:white"><%= i18n.__('Social') %>
+         <ul style="list-style-type:none">
            <li> <a href="https://twitter.com/<%=store.twitter%>" class="twitter-follow-button" data-show-count="false">Follow <%= store.twitter %></a></li>
-           <li> <%= store.facebook %> </li>
-           <li> <%= store.instagram %> </li>
+           <li> <div class="fb-like" data-href="http://www..facebook.com/<%= store.facebook %>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+          </li>
+           <li> <a href="https://www.instagram.com/<%= store.instagram %>/?ref=badge" class="ig-b- ig-b-v-24"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a> </li>
          </ul>
 </div>
-    <div class="col-sm-4" style="background-color:black;color:white">About us
-       <ul>
-           <li>About us</li>
-           <li>Media </li>
-           <li>Customer inquiries</li>
+    <div class="col-sm-4" style="background-color:black;color:white"><%= i18n.__('Company') %>
+       <ul style="list-style-type:none">
+           <li><%= i18n.__('About') %></li>
+           <li><%= i18n.__('Media') %> </li>
+           <li><%= i18n.__('Customer inquiries') %></li>
 
        </ul>
    </div>
-    <div class="col-sm-4" style="background-color:black;color:white">Contact
-       <ul>
+    <div class="col-sm-4" style="background-color:black;color:white"><%= i18n.__('Contact') %>
+       <ul style="list-style-type:none">
 
          <li> <%= store.address %> </li>
          <li> <%= store.phone %> </li>

@@ -1,0 +1,30 @@
+{
+    "Home": {
+        "fr": "Bienvenue",
+        "en": "Home"
+    },
+    "About": {
+        "fr": "A propos de nous",
+        "en": "About"
+    },
+    "Contact": {
+        "fr": "Contact",
+        "en": "Contact"
+    },
+    "Social": {
+        "fr": "Réseaux sociaux",
+        "en": "Social"
+    },
+    "Company": {
+        "fr": "Entreprise",
+        "en": "Company"
+    },
+    "Customer inquiries": {
+        "fr": "Relations clients",
+        "en": "Customer inquiries"
+    },
+    "Media": {
+        "fr": "Dossier presse",
+        "en": "Media"
+    }
+}

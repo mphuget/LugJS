@@ -25,7 +25,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 //describe the model for the user
-var User = require('../models/user');
+var User = require('../models/admin');
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {

@@ -20,13 +20,16 @@ The project is located at: https://github.com/mphuget/LugJS
 Author: Marc-Philippe Huget
 */
 
-//render the signup form
-function getForm(req, res) {
-    res.render('../views/pages/signin', {
-		alert : '',
-		success : '',
-		info : ''});
+//profile
+function profile(req, res) {
 
+  var admin = req.session.admin;
+  stores = admin.local.stores;
+  if (stores.length > 0) {
+    
+  }
+  else
+    res.render('../views/pages/profile', {stores: []});
 }
 
-module.exports.getForm = getForm;
+module.exports.profile = profile;

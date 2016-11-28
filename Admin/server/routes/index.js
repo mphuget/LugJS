@@ -27,6 +27,7 @@ var router = require('express').Router();
 var signup = require('../controllers/signup');
 var signin = require('../controllers/signin');
 var signout = require('../controllers/signout');
+var profile = require('../controllers/profile');
 
 var passport = require('passport');
 var local = require('../config/local-passport');
@@ -54,7 +55,7 @@ router.get('/admin/signout', function(req, res) {
 //user profile
 router.get('/admin/profile', local.isAuthenticated, function(req, res) {
 
-  signup.profile(req, res);
+  profile.profile(req, res);
 
 });
 

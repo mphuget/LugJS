@@ -27,7 +27,7 @@ var bcrypt   = require('bcrypt-nodejs');
 //through social network
 var Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+var AdminSchema = new Schema({
 
 	local : {
     firstName: String,
@@ -43,65 +43,56 @@ var UserSchema = new Schema({
         type : Date,
         default : Date.now
       },
-      roles: {
-        admin: {
-          type: Boolean,
-          default : false
-        },
-        account: {
-          type: Boolean,
-          default : true
-        }
-    }
+			stores : [ String ]
   }
 });
 
 
 //  Hash the password before we even save it to the database
-UserSchema.pre('save', function(next) {
-  var user = this;
-  if (!user.isModified('local.password'))
+AdminSchema.pre('save', function(next) {
+  var admin = this;
+  if (!admin.isModified('local.password'))
   	return next();
   bcrypt.genSalt(10, function(err, salt) {
     if (err)
     	return next(err);
-    bcrypt.hash(user.local.password, salt, null, function(err, hash) {
+    bcrypt.hash(admin.local.password, salt, null, function(err, hash) {
       if (err)
       	return next(err);
-      user.local.password = hash;
+      admin.local.password = hash;
       next();
     });
   });
 })
 
 // compare password in the database and the one that the user type in
-UserSchema.methods.comparePassword = function(password) {
+AdminSchema.methods.comparePassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);
 }
 
-UserSchema.methods.canPlayRoleOf = function(role) {
-  if (role === "admin" && this.local.roles.admin) {
-    return true;
-  }
+// UserSchema.methods.canPlayRoleOf = function(role) {
+//   if (role === "admin" && this.local.roles.admin) {
+//     return true;
+//   }
+//
+//   if (role === "account" && this.local.roles.account) {
+//     return true;
+//   }
+//
+//   return false;
+// }
 
-  if (role === "account" && this.local.roles.account) {
-    return true;
-  }
+// AdminSchema.methods.defaultReturnUrl = function() {
+//     var returnUrl = '/';
+//     if (this.canPlayRoleOf('account')) {
+//       returnUrl = '/profile/';
+//     }
+//
+//     if (this.canPlayRoleOf('admin')) {
+//       returnUrl = '/admin/';
+//     }
+//
+//     return returnUrl;
+// }
 
-  return false;
-}
-
-UserSchema.methods.defaultReturnUrl = function() {
-    var returnUrl = '/';
-    if (this.canPlayRoleOf('account')) {
-      returnUrl = '/profile/';
-    }
-
-    if (this.canPlayRoleOf('admin')) {
-      returnUrl = '/admin/';
-    }
-
-    return returnUrl;
-}
-
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Admin', AdminSchema);

@@ -20,13 +20,34 @@ The project is located at: https://github.com/mphuget/LugJS
 Author: Marc-Philippe Huget
 */
 
-//render the signup form
-function getForm(req, res) {
-    res.render('../views/pages/signin', {
-		alert : '',
-		success : '',
-		info : ''});
+//used to set strict mode when checking the code
+'use strict';
 
-}
+//contains the database configuration
+var database = require('./Core/server/config/config_database');
 
-module.exports.getForm = getForm;
+//to access the database stored in MongoDB
+var mongoose = require('mongoose');
+
+//connects to the MongoDB database
+mongoose.connect(database.url, function(err) {
+
+  if (err) {
+
+    throw err;
+
+  }
+  else {
+
+    console.log("Connected to the database Lug");
+
+  }
+
+});
+
+//var User = require('/Admin/server/models/user');
+//var aUser = new User();
+var args = process.argv.slice(2);
+args.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+});

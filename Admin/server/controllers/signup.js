@@ -22,46 +22,28 @@ Author: Marc-Philippe Huget
 
 //render the signup form
 function getForm(req, res) {
-  var Store = require('../../../Store/server/models/store');
-
-  Store.findOne({id: '1'}, function(err, store) {
-    if (err) throw err;
-
-    res.render('../views/pages/signup', {store : store});
-
-  });
-
+    res.render('../views/pages/signup', {alert:{}, success:{}, info:{}});
 }
 
 //add the user
 function addUser(req, res) {
   //we create a new User to be saved into the database
-  var User = require('../models/user');
-  var user = new User();
+  var Admin = require('../models/admin');
+  var admin = new Admin();
 
   //we create an object with all the data
-  user.local.firstName = req.body.firstName;
-  user.local.lastName = req.body.lastName;
-  user.local.email = req.body.email;
-  user.local.password = req.body.password;
+  admin.local.firstName = req.body.firstName;
+  admin.local.lastName = req.body.lastName;
+  admin.local.email = req.body.email;
+  admin.local.password = req.body.password;
 
-  user.save(function(err, user) {
+  admin.save(function(err, user) {
       if (err) return next(err);
 
+      req.session.admin = admin;
       res.redirect('/admin/profile');
-  });
-}
-
-//profile
-function profile(req, res) {
-  var Store = require('../../../Store/server/models/store');
-  Store.findOne({id: '1'}, function(err, store) {
-    if (err) throw err;
-
-    res.render('../views/pages/profile', {store : store});
   });
 }
 
 module.exports.getForm = getForm;
 module.exports.addUser = addUser;
-module.exports.profile = profile;

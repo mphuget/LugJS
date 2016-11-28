@@ -26,7 +26,11 @@ function profile(req, res) {
   var admin = req.session.admin;
   stores = admin.local.stores;
   if (stores.length > 0) {
-    
+    var Store = require('../../../../Store/server/models/store');
+
+    Store.find({id: store}, function(err, aStore) {
+
+    })
   }
   else
     res.render('../views/pages/profile', {stores: []});

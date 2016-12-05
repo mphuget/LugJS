@@ -27,6 +27,7 @@ var router = require('express').Router();
 var signup = require('../controllers/signup');
 var signin = require('../controllers/signin');
 var signout = require('../controllers/signout');
+var lost = require('../controllers/lost');
 var profile = require('../controllers/profile');
 
 var passport = require('passport');
@@ -40,9 +41,9 @@ router.get('/admin/signup', function(req, res) {
 });
 
 //add the user
-router.post('/admin/signup', function(req, res) {
+router.post('/admin/signup', function(req, res, next) {
 
-  signup.addUser(req, res);
+  signup.addUser(req, res, next);
 
 });
 
@@ -67,12 +68,33 @@ router.get('/admin/profile', local.isAuthenticated, function(req, res) {
 //   res.send("Test protected");
 // });
 
+//when hitting the admin home, go directly to signin
+router.get('/admin', function(req, res) {
+
+  res.redirect('/admin/signin');
+
+});
+
 //sign in
 router.get('/admin/signin', function(req, res) {
 
   signin.getForm(req, res);
 
 });
+
+//lost password route
+router.get('/admin/signin/lost', function(req, res) {
+
+  lost.lost_get(req, res);
+
+});
+
+router.post('/admin/signin/lost', function(req, res) {
+
+  lost.lost_post(req, res);
+
+});
+
 
 //authenticate the user
 router.post('/admin/signin', passport.authenticate('login', {
@@ -81,5 +103,15 @@ router.post('/admin/signin', passport.authenticate('login', {
     failureFlash : true
 }));
 
+router.get('/admin/username/:id', function(req, res) {
+    var Admin = require('../models/admin');
+    Admin.findOne({"local.username": req.params.id}, function(err, admin) {
+      if (admin)
+        res.send("Taken");
+      else {
+        res.send("Available");
+      }
+    });
 
+})
 module.exports = router;

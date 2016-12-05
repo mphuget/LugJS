@@ -23,7 +23,7 @@ Author: Marc-Philippe Huget
 //render the signup form
 function getForm(req, res) {
     res.render('../views/pages/signin', {
-		alert : '',
+		alert : req.flash('alert'),
 		success : '',
 		info : ''});
 

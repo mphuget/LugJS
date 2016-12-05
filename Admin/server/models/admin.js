@@ -32,18 +32,27 @@ var AdminSchema = new Schema({
 	local : {
     firstName: String,
     lastName : String,
-      email : {
-        type : String,
-        index : true,
-        unique : true,
-        lowercase : true
-      },
-      password : String,
-      createdAt : {
-        type : Date,
-        default : Date.now
-      },
-			stores : [ String ]
+    email : {
+      type : String,
+      index : true,
+      unique : true,
+      lowercase : true
+    },
+    password : String,
+		username : {
+			type : String,
+			index : true,
+			unique : true
+		},
+    createdAt : {
+      type : Date,
+      default : Date.now
+    },
+		stores : [ String ],
+		confirmed : {
+			type : Boolean,
+			default : false
+		}
   }
 });
 

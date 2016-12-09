@@ -25,7 +25,7 @@ function getForm(req, res) {
     res.render('../views/pages/signin', {
 		alert : req.flash('alert'),
 		success : '',
-		info : ''});
+		info : req.flash('info')});
 
 }
 

@@ -45,18 +45,29 @@ passport.use('login', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
   }, function(req, email, password, done) {
+
     User.findOne({ 'local.email': email}, function(err, user) {
+
       if (err) return done(err);
 
       if (!user) {
-        return done(null, false, req.flash('alert', 'No user has been found'));
+        req.flash('alert', 'No user has been found');
+        return done(null, false, {});
       }
 
       if (!user.comparePassword(password)) {
-        return done(null, false, req.flash('alert', 'The password does not match the the user account'));
-    }
-    return done(null, user);
-  });
+        req.flash('alert', 'The password does not match the the user account');
+        return done(null, false, {});
+      }
+
+      if (user.local.confirmed == false) {
+          req.flash('alert', 'You should confirm your account before using it');
+          return done(null, false, {});
+      }
+
+      return done(null, user);
+
+    });
 }));
 
 //custom function to validate

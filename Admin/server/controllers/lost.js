@@ -56,7 +56,7 @@ function lost_get(req, res) {
 		res.redirect('/admin/profile');
 	}
 	else {
-		res.render('../pages/lostPassword', {
+		res.render('../views/pages/lostPassword', {
 		title: i18n.__('Company'),
 		alert : '',
 		success : '',
@@ -66,21 +66,18 @@ function lost_get(req, res) {
 }
 
 function lost_post(req, res) {
-	var User = require('../models/user');
-	var utilities = require('../../../Core/server/utilities/utilities');
+	var User = require('../models/admin');
+	//var utilities = require('../../../Core/server/utilities/utilities');
 	var LostPassword = require('../models/lostPassword');
 
 	User.findOne({'local.email' : req.body.email}, function(err, existingUser) {
-
-		console.log(existingUser);
-
 	    if (existingUser) {
 	    	//we issue a flash message for the form to render
 	      	req.flash('info', 'An email was sent to this account ' + req.body.email + ' to set a new password');
-	      	var text = 'Dear ' + existingUser.local.firstName + ' ' + existingUser.local.lastName + '\n';
+	      	// var text = 'Dear ' + existingUser.local.firstName + ' ' + existingUser.local.lastName + '\n';
 	      	var id = generate();
-	      	text = text + '\n Please enter your new email when clicking on: http://localhost:3000/signin/reset/' + id;
-	      	utilities.sendEmail(existingUser, text);
+	      	// text = text + '\n Please enter your new email when clicking on: http://localhost:3000/signin/reset/' + id;
+	      	// utilities.sendEmail(existingUser, text);
 
 	      	var LP = new LostPassword();
 	      	LP.id = id;
@@ -91,11 +88,11 @@ function lost_post(req, res) {
 
 	      	});
 
-	      	return res.redirect('/signin/reset');
+	      	return res.redirect('/admin/signin');
 	    }
 	    else {
 	      	req.flash('alert', 'This account does not exist ' + req.body.email);
-	      	return res.redirect('/signin/lost');
+	      	return res.redirect('/admin/signin/lost');
 	    }
 
 	});

@@ -28,8 +28,9 @@ var signup = require('../controllers/signup');
 var signin = require('../controllers/signin');
 var signout = require('../controllers/signout');
 var lost = require('../controllers/lost');
+var reset = require('../controllers/reset');
 var profile = require('../controllers/profile');
-
+var logout = require('../controllers/logout');
 var passport = require('passport');
 var local = require('../config/local-passport');
 
@@ -95,6 +96,24 @@ router.post('/admin/signin/lost', function(req, res) {
 
 });
 
+//reset password
+router.get('/admin/signin/reset', function(req, res) {
+
+  reset.reset_get(req, res);
+
+});
+
+router.get('/admin/signin/reset/:id', function(req, res) {
+
+  reset.reset_get_id(req, res);
+
+});
+
+router.post('/admin/signin/reset', function(req, res) {
+
+    reset.reset_post(req, res);
+
+});
 
 //authenticate the user
 router.post('/admin/signin', passport.authenticate('login', {
@@ -114,4 +133,12 @@ router.get('/admin/username/:id', function(req, res) {
     });
 
 })
+
+//logout
+router.get('/admin/logout', function(req, res) {
+
+  logout.logout(req, res);
+
+});
+
 module.exports = router;

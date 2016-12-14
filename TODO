@@ -11,16 +11,17 @@ List of tasks to do on LugJS:
 * Create the route for managing users in the Admin part (DONE)
 * Add the controller for managing users (DONE)
 * Create the different views for sign up, logout (DONE)
-* Create the different views for lost password, reset password
+* Create the different views for lost password, reset password (DONE)
 
 Date: 2016/12/01
 
 List of tasks to do on LugJS:
-* signup form: validation of username before clicking on the button
+* signup form: validation of username before clicking on the button (DONE)
 * When a new admin is added, send an email to request confirmation of the
-account and block the access as long as the email is not confirmed
-* Add the process for the loss of password: send email to the account
-* Change the password when requiring a new one
-* Add flash messages on the different cases for admin
+account and block the access as long as the email is not confirmed (DONE)
+* Add the process for the loss of password: send email to the account (DONE)
+* Change the password when requiring a new one (DONE)
+* Add flash messages on the different cases for admin (DONE)
 * /admin/signin reduce the size of the fields (DONE)
 * Use MailGun for sending emails due to authorization issues with Gmail -> delayed, I need a domain to send messages
+(DONE)

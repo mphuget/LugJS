@@ -20,6 +20,67 @@ The project is located at: https://github.com/mphuget/LugJS
 Author: Marc-Philippe Huget
 */
 
+function generateEmail(mailgun_to, mailgun_subject, mailgun_text) {
+
+  var nodemailer = require('nodemailer');
+  var mg = require('nodemailer-mailgun-transport');
+  var config_mailgun = require('../config/mailgun');
+
+  // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
+  var auth = {
+    auth: {
+      api_key: config_mailgun.api_key,
+      domain: config_mailgun.domain
+    }
+  }
+
+  var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+
+  nodemailerMailgun.sendMail({
+    from: config_mailgun.from,
+    to: mailgun_to,
+    subject: mailgun_subject,
+    text: mailgun_text,
+  }, function (err, info) {
+    if (err) {
+      console.log('Error: ' + err);
+    }
+    else {
+      console.log('Response: ' + info);
+    }
+  });
+
+}
+
+//generate a key
+function generate()
+{
+
+	var tab=new Array();
+	var tab2=new Array();
+
+	//generate the available characters for the key
+	for(i=48; i<=57; i++) {
+		tab.push(i);
+	}
+	for(i=65; i<=90; i++) {
+		tab.push(i);
+	}
+	for(i=97; i<=122; i++) {
+		tab.push(i);
+	}
+
+  	tab2[0]=String.fromCharCode(tab[Math.round((Math.random()*tab.length))]);
+
+  	for(i=1; i<=6; i++) {
+    	var recur=(tab2[i-1].charCodeAt(0))%(tab.length);
+    	var indice=Math.round(Math.random()*tab.length);
+    	tab2[i]=String.fromCharCode(tab[(recur+indice)%tab.length] );
+  	}
+	var code=tab2.join('');
+	return code;
+}
+
 //render the signup form
 function getForm(req, res) {
     var message = req.flash('alert');
@@ -32,6 +93,7 @@ function addUser(req, res, next) {
   var Admin = require('../models/admin');
   var admin = new Admin();
   var utilities = require('../../../Core/server/utilities');
+  var Confirm = require('../models/confirm');
 
   //we check whether all the fields were filled
 	//a first check is performed on form but two checks are better than one...
@@ -71,9 +133,22 @@ function addUser(req, res, next) {
 
                         req.session.admin = admin;
                 				req.flash('info', "Welcome to LugJS!");
-                				res.redirect('/admin/profile');
+                				res.redirect('/admin/signin');
                     })
     		       });
+
+               var confirm = new Confirm();
+               confirm.email = admin.local.email;
+               confirm.id = generate();
+               confirm.save(function(err, account) {
+                  if (err) return next(err);
+
+               });
+
+               generateEmail('mphuget@gmail.com',
+                             'Lug: Please confirm your email',
+                             'Click on this link to confirm your account: http://localhost:3000/admin/confirm/' + admin.local.email + '/' + confirm.id);
+
     		    }
   		});
   }
@@ -87,5 +162,72 @@ function addUser(req, res, next) {
 
 }
 
+function confirm(req, res) {
+
+    var Admin = require('../models/admin');
+    var Confirm = require('../models/confirm');
+
+    Admin.findOne({"local.email": req.params.email}, function(err, admin) {
+
+        if (err)
+          throw err;
+
+        Confirm.findOne({email:admin.local.email}, function(err, account) {
+            if (err)
+              throw err;
+
+            if (account.id == req.params.key) {
+              Confirm.remove({email:admin.local.email}, function(err) {
+                if (err)
+                  throw err;
+
+              });
+            }
+            else {
+              req.flash('alert', 'Wrong key for confirmation. Check email');
+              res.redirect('/admin/signin');
+            }
+
+        });
+
+        Admin.update({"local.email": req.params.email}, {"local.confirmed":true}, {upsert:true}, function(err, admin) {
+            if (err)
+              throw err;
+
+            req.flash('Info', "Your account is now confirmed");
+            res.redirect('/admin/signin');
+
+        });
+
+        var nodemailer = require('nodemailer');
+        var mg = require('nodemailer-mailgun-transport');
+
+        // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
+        var auth = {
+          auth: {
+            api_key: 'key-602704126a4067288018047fd4ff9705',
+            domain: 'sandbox768d6b2a57554bcb898099adebbc7347.mailgun.org'
+          }
+        }
+
+        var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+
+        nodemailerMailgun.sendMail({
+          from: 'myemail@example.com',
+          to: 'recipient@domain.com', // An array if you have multiple recipients.
+          subject: 'Hey you, awesome!',
+          text: 'Mailgun rocks, pow pow!',
+        }, function (err, info) {
+          if (err) {
+            console.log('Error: ' + err);
+          }
+          else {
+            console.log('Response: ' + info);
+          }
+        });
+    });
+}
+
 module.exports.getForm = getForm;
 module.exports.addUser = addUser;
+module.exports.confirm = confirm;

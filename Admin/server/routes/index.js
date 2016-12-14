@@ -141,4 +141,11 @@ router.get('/admin/logout', function(req, res) {
 
 });
 
+//confirm account
+router.get('/admin/confirm/:email/:key', function(req, res) {
+
+  signup.confirm(req, res);
+
+});
+
 module.exports = router;

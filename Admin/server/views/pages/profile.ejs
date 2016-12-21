@@ -12,12 +12,27 @@
     </header>
 
     <main>
-      <h2>Profile</h2>
-    </main>
+      <h1><span class="fa fa-sign-in"></span> Login</h1>
+ <!-- show any messages that come back with authentication -->
+  <% if (alert.length > 0) { %>
+    <div class="alert alert-danger"><%= alert %></div>
+  <% } %>
 
-    <footer>
-        <% include ../partials/footer %>
-    </footer>
+  <% if (success.length > 0) { %>
+    <div class="alert alert-success"><%= success %></div>
+  <% } %>
+
+  <% if (info.length > 0) { %>
+    <div class="alert alert-info"><%= info %></div>
+  <% } %>
+
+  <h2> Profile </h2>
+  
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
 
 </body>
 </html>

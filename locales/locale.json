@@ -26,5 +26,57 @@
     "Media": {
         "fr": "Dossier presse",
         "en": "Media"
+    },
+    "Taken": {
+        "fr": "Ce nom d'utilisateur est déjà pris",
+        "en": "This username is already taken"
+    },
+    "Available": {
+        "fr": "Ce nom d'utilisateur est disponible",
+        "en": "This username is available"
+    },
+    "Lost_1": {
+        "fr": "Un email a été envoyé à cette adresse",
+        "en": "An email was sent to this account"
+    },
+    "Lost_2": {
+        "fr": "Ce compte n'existe pas",
+        "en": "This account does not exist"
+    },
+    "Reset_1": {
+        "fr": "Il faut être connecté pour mettre à jour le mot de passe",
+        "en": "You should be authenticated to reset your password"
+    },
+    "Reset_2": {
+        "fr": "Vous pouvez changer le mot de passe pour :",
+        "en": "You could change the password for account: "
+    },
+    "Reset_3": {
+        "fr": "Cet identifiant n'existe plus",
+        "en": "This id no longer exists to reset a password"
+    },
+    "Reset_4": {
+        "fr": "Modification effectuée pour ",
+        "en": "Modification done for"
+    },
+    "Signup_1": {
+        "fr": "Cet email existe déjà",
+        "en": "Account with that email address already exists"
+    },
+    "Signup_2": {
+        "fr": "Bienvenue dans Lug",
+        "en": "Welcome to Lug!"
+    },
+    "Signup_4": {
+        "fr": "Il y a des erreurs dans le formulaire",
+        "en": "There is an error on the form data, please check again"
+    },
+    "Signup_5": {
+        "fr": "La clé de confirmation n'est pas valide, veuillez vérifier l'email",
+        "en": "Wrong key for confirmation. Check email"
+    },
+    "Signup_6": {
+        "fr": "Votre compte est maintenant vérifié",
+        "en": "Your account is now confirmed"
     }
 }

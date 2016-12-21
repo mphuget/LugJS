@@ -15,26 +15,28 @@ You should have received a copy of the GNU General Public License
 along with Lug.  If not, see <http://www.gnu.org/licenses/>.
 */
 /*
-The project is located at: https://github.com/mphuget/Lug
+The project is located at: https://github.com/mphuget/LugJS
 
 Author: Marc-Philippe Huget
 */
 
+//used when the user deliberately wants to reset his/her password
 function reset_get(req, res) {
   if (req.isAuthenticated()) {
 		res.render('../views/pages/resetPassword', {
-		title: 'Node.js eCommerce - Reset password',
+		title: 'Lug - Reset password',
 		email: req.user.local.email,
-		alert : '',
-		success : '',
-		info : ''});
+		alert : req.flash('alert'),
+		success : req.flash('success'),
+		info : req.flash('info')});
 	}
 	else {
-		req.flash('alert', 'You should be authenticated to reset your password');
+		req.flash('alert', i18n.__('Reset_1'));
 		res.redirect('/admin/signin');
 	}
 }
 
+//reset a password after receiving an email with an id
 function reset_get_id(req, res) {
 	var LostPassword = require('../models/lostPassword');
 
@@ -42,19 +44,21 @@ function reset_get_id(req, res) {
     	if (err)
     		console.log(err);
       if (lost != null) {
-        	res.render('../views/pages/resetPassword', {email : lost.email,
-        									   alert : '',
-        									   success : '',
-        									   info : 'You could change the password for account: ' + lost.email});
+        	res.render('../views/pages/resetPassword', {
+              email : lost.email,
+        			alert : req.flash('alert'),
+        			success : req.flash('success'),
+        			info : i18n.__('Reset_2') + lost.email});
       }
       else {
-        req.flash('alert', 'This id no longer exists to reset a password ' + req.params.id);
+        req.flash('alert', i18n.__('Reset_3') + req.params.id);
         res.redirect('/admin/signin');
       }
   });
 
 }
 
+//update password
 function reset_post(req, res) {
 	var bcrypt   = require('bcrypt-nodejs');
 	var User = require('../models/admin');
@@ -76,7 +80,7 @@ function reset_post(req, res) {
               if (err)
                 console.log(err);
               console.log('update done for ' + req.body.email);
-              req.flash('info', 'Modification done for ' + req.body.email);
+              req.flash('info', i18n.__("Reset_4") + req.body.email);
     					res.redirect('/admin/signin');
           });
 			});

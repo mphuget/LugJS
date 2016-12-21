@@ -23,5 +23,6 @@ Author: Marc-Philippe Huget
 module.exports = {
   api_key : 'YOUR MAILGUN KEY HERE',
   domain : 'YOUR MAILGUN DOMAIN HERE',
-  from : 'YOUR EMAIL ADDRESS HERE'
+  from : 'YOUR EMAIL ADDRESS HERE',
+  url: 'http://localhost:3000/'
 }

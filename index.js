@@ -152,7 +152,6 @@ app.use(passport.session());
 app.use('/img',express.static(path.join(__dirname, 'Resources/images')));
 app.use('/css',express.static(path.join(__dirname, 'Resources/css')));
 
-
 //serve the RESTful API
 //definition of the different routes
 //RESTful API

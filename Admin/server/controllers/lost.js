@@ -1,18 +1,18 @@
 /*
-This file is part of LugJS.
+This file is part of Lug.
 
-LugJS is free software: you can redistribute it and/or modify
+Lug is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-LugJS is distributed in the hope that it will be useful,
+Lug is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with LugJS.  If not, see <http://www.gnu.org/licenses/>.
+along with Lug.  If not, see <http://www.gnu.org/licenses/>.
 */
 /*
 The project is located at: https://github.com/mphuget/LugJS
@@ -38,13 +38,13 @@ function generate()
 		tab.push(i);
 	}
 
-  	tab2[0]=String.fromCharCode(tab[Math.round((Math.random()*tab.length))]);
+  tab2[0]=String.fromCharCode(tab[Math.round((Math.random()*tab.length))]);
 
-  	for(i=1; i<=6; i++) {
+  for(i=1; i<=10; i++) {
     	var recur=(tab2[i-1].charCodeAt(0))%(tab.length);
     	var indice=Math.round(Math.random()*tab.length);
     	tab2[i]=String.fromCharCode(tab[(recur+indice)%tab.length] );
-  	}
+  }
 	var code=tab2.join('');
 	return code;
 }
@@ -57,28 +57,38 @@ function lost_get(req, res) {
 	}
 	else {
 		res.render('../views/pages/lostPassword', {
-		title: i18n.__('Company'),
-		alert : '',
-		success : '',
-		info : ''});
+			title: i18n.__('Company'),
+			alert : req.flash('alert'),
+			success : req.flash('success'),
+			info : req.flash('info')
+		});
 	}
-
 }
 
+//create a mail to the email account to create a new password
 function lost_post(req, res) {
 	var User = require('../models/admin');
-	//var utilities = require('../../../Core/server/utilities/utilities');
 	var LostPassword = require('../models/lostPassword');
+	var nodemailer = require('nodemailer');
+  var mg = require('nodemailer-mailgun-transport');
+  var config_mailgun = require('../config/mailgun');
+
+	// This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
+  var auth = {
+    auth: {
+      api_key: config_mailgun.api_key,
+      domain: config_mailgun.domain
+    }
+  }
+
+  var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 	User.findOne({'local.email' : req.body.email}, function(err, existingUser) {
 	    if (existingUser) {
-	    	//we issue a flash message for the form to render
-	      	req.flash('info', 'An email was sent to this account ' + req.body.email + ' to set a new password');
-	      	// var text = 'Dear ' + existingUser.local.firstName + ' ' + existingUser.local.lastName + '\n';
-	      	var id = generate();
-	      	// text = text + '\n Please enter your new email when clicking on: http://localhost:3000/signin/reset/' + id;
-	      	// utilities.sendEmail(existingUser, text);
+	    		//we issue a flash message for the form to render
+	      	req.flash('info', i18n.__('Lost_1') + req.body.email);
 
+	      	var id = generate();
 	      	var LP = new LostPassword();
 	      	LP.id = id;
 	      	LP.email = existingUser.local.email;
@@ -86,12 +96,27 @@ function lost_post(req, res) {
 	      		if (err)
 	      			console.log(err);
 
+							nodemailerMailgun.sendMail({
+						    from: config_mailgun.from,
+						    to: 'mphuget@gmail.com',
+						    subject: "Lug: reset your password",
+						    text: "Dear " + existingUser.local.firstName + ' ' + existingUser.local.lastName + '\n' +
+										'\n Please enter your new password when clicking on: ' + config_mailgun.url + '/admin/signin/reset/' + id;
+						  }, function (err, info) {
+						    if (err) {
+						      console.log('Error: ' + err);
+						    }
+						    else {
+						      console.log('Response: ' + info);
+						    }
+						  });
+
 	      	});
 
 	      	return res.redirect('/admin/signin');
 	    }
 	    else {
-	      	req.flash('alert', 'This account does not exist ' + req.body.email);
+	      	req.flash('alert', i18n.__('Lost_2') + req.body.email);
 	      	return res.redirect('/admin/signin/lost');
 	    }
 

@@ -1,18 +1,18 @@
 /*
-This file is part of LugJS.
+This file is part of Lug.
 
-LugJS is free software: you can redistribute it and/or modify
+Lug is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-LugJS is distributed in the hope that it will be useful,
+Lug is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with LugJS.  If not, see <http://www.gnu.org/licenses/>.
+along with Lug.  If not, see <http://www.gnu.org/licenses/>.
 */
 /*
 The project is located at: https://github.com/mphuget/LugJS
@@ -20,6 +20,7 @@ The project is located at: https://github.com/mphuget/LugJS
 Author: Marc-Philippe Huget
 */
 
+//generate an email and send it via mailgun
 function generateEmail(mailgun_to, mailgun_subject, mailgun_text) {
 
   var nodemailer = require('nodemailer');
@@ -38,6 +39,7 @@ function generateEmail(mailgun_to, mailgun_subject, mailgun_text) {
 
   nodemailerMailgun.sendMail({
     from: config_mailgun.from,
+    //has to be changed, on the sandbox, I have to use my own address
     to: mailgun_to,
     subject: mailgun_subject,
     text: mailgun_text,
@@ -72,7 +74,7 @@ function generate()
 
   	tab2[0]=String.fromCharCode(tab[Math.round((Math.random()*tab.length))]);
 
-  	for(i=1; i<=6; i++) {
+  	for(i=1; i<=10; i++) {
     	var recur=(tab2[i-1].charCodeAt(0))%(tab.length);
     	var indice=Math.round(Math.random()*tab.length);
     	tab2[i]=String.fromCharCode(tab[(recur+indice)%tab.length] );
@@ -121,7 +123,7 @@ function addUser(req, res, next) {
 
     		    if (existingUser) {
     		    	  //we issue a flash message for the form to render
-    		      	req.flash('alert', 'Account with that email address already exists');
+    		      	req.flash('alert', i18n.__("Signup_1"));
     		      	res.redirect('/admin/signup');
     		    }
     		    else {
@@ -132,7 +134,7 @@ function addUser(req, res, next) {
                 				if (err) return next(err);
 
                         req.session.admin = admin;
-                				req.flash('info', "Welcome to LugJS!");
+                				req.flash('info', i18n.__("Signup_2"));
                 				res.redirect('/admin/signin');
                     })
     		       });
@@ -156,12 +158,13 @@ function addUser(req, res, next) {
   //there are errors on the validation
   //issue an error to the user
   else {
-    req.flash('alert', 'There is an error on the form data, please check again');
+    req.flash('alert', i18n.__("Signup_4"));
     res.status(400).redirect('/admin/signup');
   }
 
 }
 
+//confirmation of the email account after receiving an email from Lug
 function confirm(req, res) {
 
     var Admin = require('../models/admin');
@@ -184,7 +187,7 @@ function confirm(req, res) {
               });
             }
             else {
-              req.flash('alert', 'Wrong key for confirmation. Check email');
+              req.flash('alert', i18n.__("Signup_5"));
               res.redirect('/admin/signin');
             }
 
@@ -194,37 +197,11 @@ function confirm(req, res) {
             if (err)
               throw err;
 
-            req.flash('Info', "Your account is now confirmed");
+            req.flash('Info', i18n.__("Signup_6"));
             res.redirect('/admin/signin');
 
         });
 
-        var nodemailer = require('nodemailer');
-        var mg = require('nodemailer-mailgun-transport');
-
-        // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
-        var auth = {
-          auth: {
-            api_key: 'key-602704126a4067288018047fd4ff9705',
-            domain: 'sandbox768d6b2a57554bcb898099adebbc7347.mailgun.org'
-          }
-        }
-
-        var nodemailerMailgun = nodemailer.createTransport(mg(auth));
-
-        nodemailerMailgun.sendMail({
-          from: 'myemail@example.com',
-          to: 'recipient@domain.com', // An array if you have multiple recipients.
-          subject: 'Hey you, awesome!',
-          text: 'Mailgun rocks, pow pow!',
-        }, function (err, info) {
-          if (err) {
-            console.log('Error: ' + err);
-          }
-          else {
-            console.log('Response: ' + info);
-          }
-        });
     });
 }
 

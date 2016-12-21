@@ -1,12 +1,12 @@
 /*
-This file is part of LugJS.
+This file is part of Lug.
 
-LugJS is free software: you can redistribute it and/or modify
+Lug is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-LugJS is distributed in the hope that it will be useful,
+Lug is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
@@ -20,20 +20,21 @@ The project is located at: https://github.com/mphuget/LugJS
 Author: Marc-Philippe Huget
 */
 
-//profile
-function profile(req, res) {
+//display the profile
+function display(req, res) {
+  res.render('../views/pages/profile', {
+    alert : req.flash('alert'),
+    success : req.flash('success'),
+    info : req.flash('info')}
+  );
+}
 
-  var admin = req.session.admin;
-  stores = admin.local.stores;
-  if (stores.length > 0) {
-    var Store = require('../../../../Store/server/models/store');
+//update the profile
+function update(req, res) {
 
-    Store.find({id: store}, function(err, aStore) {
+    res.send("TODO update profile");
 
-    })
-  }
-  else
-    res.render('../views/pages/profile', {stores: []});
 }
 
 module.exports.profile = profile;
+module.exports.update = update;

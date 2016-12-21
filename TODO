@@ -25,3 +25,8 @@ account and block the access as long as the email is not confirmed (DONE)
 * /admin/signin reduce the size of the fields (DONE)
 * Use MailGun for sending emails due to authorization issues with Gmail -> delayed, I need a domain to send messages
 (DONE)
+
+Date: 2016/12/19
+
+List of tasks to do on LugJS:
+* Update profile

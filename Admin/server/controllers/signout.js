@@ -15,11 +15,12 @@ You should have received a copy of the GNU General Public License
 along with Lug.  If not, see <http://www.gnu.org/licenses/>.
 */
 /*
-The project is located at: https://github.com/mphuget/Lug
+The project is located at: https://github.com/mphuget/LugJS
 
 Author: Marc-Philippe Huget
 */
 
+//signout the current user
 function signout(req, res) {
 	req.logout();
 	res.redirect('/');

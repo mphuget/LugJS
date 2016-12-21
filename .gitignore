@@ -1,2 +1,3 @@
 node_modules
 Admin/server/config/mailgun.js
+npm-debug.log

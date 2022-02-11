@@ -1,4 +1,10 @@
-# nodejs-api-auth-backend
+# LugJS
+
+LugJS is a e-/m-Commerce platform written in Node.js, Express and MongoDB for the backend.
+
+This is an ongoing project so stay up to date to find the latest. It is based on another repository
+from my Github [nodejs-api-auth-backend](https://github.com/mphuget/nodejs-api-auth-backend.git), which 
+provides the basic of authentication and API server.
 
 ## Used tools
 
@@ -23,11 +29,11 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 
 1. Clone the repository:
 
-git clone https://github.com/mphuget/nodejs-api-auth-backend.git
+git clone https://github.com/mphuget/LugJS.git
 
 2. Go to the repository:
 
-cd nodejs-api-auth-backend
+cd LugJS
 
 3. Install the dependencies (removed from Git repository):
 
@@ -53,18 +59,4 @@ node server.js
 If everything went smoothly, you should see a running on port message and connected to database messages
 
 The different routes were tested under Postman
-
-## How to reuse 
-
-From this code, it is possible to add an API
-
-1. Create a file in the routes folder where you will provide all the routes for your API
-
-2. Create a file in the controller folder where the corresponding behaviour will be added
-
-3. (If needed) Add a file in the models folder for the model
-
-4. Modify the server.js file to add the routes
-
-Et voilà! Enjoy!
 

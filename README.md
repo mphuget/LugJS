@@ -21,11 +21,11 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 
 - Data stored in MongoDB
 
-* Shop
+### Shop
 
 - Create a Shop
 
-* User authentication 
+### User authentication 
 
 - Sign up with a name and a password
 - Sign in with a name and a password

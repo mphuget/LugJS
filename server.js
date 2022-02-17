@@ -150,9 +150,11 @@ app.use(passport.initialize());
 
 //Access the routes
 const userRoutes = require('./routes/user');
+const shopRoutes = require('./routes/shop');
 
 //Use the routes
 app.use(userRoutes);
+app.use(shopRoutes);
 
 //When there is no route that caught the incoming request
 //use the 404 middleware

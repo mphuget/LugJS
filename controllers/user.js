@@ -16,6 +16,7 @@ function signin(req, res) {
 		if (user.comparePassword(req.body.password)) {
 
             req.session.username = req.body.name;
+			req.session.userid = user._id;
 			req.session.logged = true;
             res.status(200).json({token: createToken(user)});
 		}

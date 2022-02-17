@@ -22,4 +22,31 @@ function createShop(req, res) {
 
 }
 
+function readShop(req, res) {
+
+    let Shop = require("../models/shop");
+
+    Shop.find({$and: [{ownedBy : req.session.userid}, {_id : req.params.id}]})
+    .then((shop) => {
+        res.status(200).json(shop);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+ }
+
+ function readShopAll(req, res) {
+
+    let Shop = require("../models/shop");
+
+    Shop.find({ownedBy : req.session.userid})
+    .then((shops) => {
+        res.status(200).json(shops);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+ }
+
 module.exports.create = createShop;
+module.exports.read = readShop;
+module.exports.readAll = readShopAll;
+

@@ -8,5 +8,19 @@ router.post('/shop/create', (req, res) => {
 
 });
 
+//Read shop created by a user
+router.get('/shop/read/:id', (req, res) => {
+
+    controller.read(req, res);
+
+});
+
+//Read all the shops created by a user
+router.get('/shop/read/all', (req, res) => {
+
+    controller.readAll(req, res);
+
+});
+
 
 module.exports = router;

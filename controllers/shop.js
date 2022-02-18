@@ -60,9 +60,24 @@ function updateShop(req, res) {
     });
 }
 
+function closeShop(req, res) {
+    let Shop = require("../models/shop");
+
+    Shop.findByIdAndUpdate({_id: req.params.id}, 
+        {close : true}, 
+        {new : true})
+    .then((closedShop) => {
+        res.status(200).json(closedShop);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports.create = createShop;
 module.exports.read = readShop;
 module.exports.readAll = readShopAll;
 module.exports.update = updateShop;
+module.exports.close = closeShop;
+
 
 

@@ -11,6 +11,10 @@ let ShopSchema = new Schema({
   },
   description : String,
   ownedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  close : {
+      type : Boolean,
+      default : false
+  },
   createdAt : {
     type : Date,
     default : Date.now

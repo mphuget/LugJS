@@ -16,7 +16,7 @@ router.get('/shop/read/:id', (req, res) => {
 });
 
 //Read all the shops created by a user
-router.get('/shop/read/all', (req, res) => {
+router.get('/shop/readall', (req, res) => {
 
     controller.readAll(req, res);
 
@@ -29,6 +29,12 @@ router.put('/shop/update/:id', (req, res) => {
 
 });
 
+//Close a Shop (the Shop is not deleted from the database)
+router.delete('/shop/close/:id', (req, res) => {
+
+    controller.close(req, res);
+
+});
 
 
 module.exports = router;

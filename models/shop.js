@@ -15,6 +15,7 @@ let ShopSchema = new Schema({
       type : Boolean,
       default : false
   },
+  departments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Department'}],
   createdAt : {
     type : Date,
     default : Date.now

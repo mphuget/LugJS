@@ -29,6 +29,10 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Update a Shop
 - Close a Shop
 
+### Department
+
+- Create a Department and link it to a Shop
+
 ### User authentication 
 
 - Sign up with a name and a password

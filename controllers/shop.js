@@ -1,9 +1,6 @@
 function createShop(req, res) {
     let Shop = require('../models/shop');
 
-    console.log(req.session.userid);
-    console.log(req.session.username);
-
     let newShop = Shop ({
         name: req.body.name,
         description : req.body.description,

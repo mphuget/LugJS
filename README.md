@@ -26,6 +26,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Create a Shop
 - Read a Shop (for the logged user)
 - Read all the Shop (for the logged user)
+- Update a Shop
 
 ### User authentication 
 

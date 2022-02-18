@@ -22,5 +22,13 @@ router.get('/shop/read/all', (req, res) => {
 
 });
 
+//Update a Shop
+router.put('/shop/update/:id', (req, res) => {
+
+    controller.update(req, res);
+
+});
+
+
 
 module.exports = router;

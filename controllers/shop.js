@@ -46,7 +46,23 @@ function readShop(req, res) {
     });
  }
 
+function updateShop(req, res) {
+    let Shop = require("../models/shop");
+
+    Shop.findByIdAndUpdate({_id: req.params.id}, 
+        {name : req.body.name, 
+        description : req.body.description}, 
+        {new : true})
+    .then((updatedShop) => {
+        res.status(200).json(updatedShop);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports.create = createShop;
 module.exports.read = readShop;
 module.exports.readAll = readShopAll;
+module.exports.update = updateShop;
+
 

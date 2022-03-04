@@ -8,4 +8,12 @@ router.post('/department/create/:id', (req, res) => {
 
 });
 
+//Update a department
+router.put('/department/update/:id', (req, res) => {
+
+    controller.update(req, res);
+
+});
+
+
 module.exports = router;

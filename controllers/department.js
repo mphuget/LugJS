@@ -31,4 +31,21 @@ function createDepartment(req, res) {
 
 }
 
+function updateDepartment(req, res) {
+    let Department = require("../models/department");
+
+    Department.findByIdAndUpdate({_id: req.params.id}, 
+        {name : req.body.name, 
+        description : req.body.description}, 
+        {new : true})
+    .then((updatedDepartment) => {
+        res.status(200).json(updatedDepartment);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
+
+
 module.exports.create = createDepartment;
+module.exports.update = updateDepartment;

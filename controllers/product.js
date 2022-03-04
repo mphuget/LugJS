@@ -32,4 +32,20 @@ function createProduct(req, res) {
 
 }
 
+function updateProduct(req, res) {
+    let Product = require("../models/product");
+
+    Product.findByIdAndUpdate({_id: req.params.id}, 
+        {name : req.body.name, 
+        description : req.body.description, 
+        price : req.body.price},
+        {new : true})
+    .then((updatedProduct) => {
+        res.status(200).json(updatedProduct);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports.create = createProduct;
+module.exports.update = updateProduct;

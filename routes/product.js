@@ -8,4 +8,11 @@ router.post('/product/create/:id', (req, res) => {
 
 });
 
+//Update a Product
+router.put('/product/update/:id', (req, res) => {
+
+    controller.update(req, res);
+
+});
+
 module.exports = router;

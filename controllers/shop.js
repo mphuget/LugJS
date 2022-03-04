@@ -1,3 +1,5 @@
+require('../models/department');
+
 function createShop(req, res) {
     let Shop = require('../models/shop');
 
@@ -70,11 +72,28 @@ function closeShop(req, res) {
     });
 }
 
+function readDepartments(req, res) {
+
+    let Shop = require('../models/shop');
+
+    Shop
+    .findById({ _id: req.params.id })
+    .populate('departments')
+    .then((shop) => {
+        res.status(200).json(shop.departments);
+
+    });
+
+}
+
+
 module.exports.create = createShop;
 module.exports.read = readShop;
 module.exports.readAll = readShopAll;
 module.exports.update = updateShop;
 module.exports.close = closeShop;
+module.exports.departments = readDepartments;
+
 
 
 

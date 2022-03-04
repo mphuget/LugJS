@@ -36,5 +36,12 @@ router.delete('/shop/close/:id', (req, res) => {
 
 });
 
+//Read all the Department from a Shop
+router.get('/shop/departments/:id', (req, res) => {
+
+    controller.departments(req, res);
+    
+});
+
 
 module.exports = router;

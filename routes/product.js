@@ -15,4 +15,12 @@ router.put('/product/update/:id', (req, res) => {
 
 });
 
+//Read a Product
+router.get('/product/read/:id', (req, res) => {
+
+    controller.read(req, res);
+
+});
+
+
 module.exports = router;

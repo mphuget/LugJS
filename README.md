@@ -39,6 +39,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 
 - Create a Product and link it to a Department
 - Update a Product
+- Read a Product
 
 ### User authentication 
 

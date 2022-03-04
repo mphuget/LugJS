@@ -47,5 +47,18 @@ function updateProduct(req, res) {
     });
 }
 
+function readProduct(req, res) {
+
+    let Product = require("../models/product");
+
+    Product.find({_id : req.params.id})
+    .then((product) => {
+        res.status(200).json(product);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+ }
+ 
 module.exports.create = createProduct;
 module.exports.update = updateProduct;
+module.exports.read = readProduct;

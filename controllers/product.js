@@ -1,0 +1,35 @@
+function createProduct(req, res) {
+    let Product = require('../models/product');
+
+    let newProduct = Product ({
+        name: req.body.name,
+        description : req.body.description,
+        price : req.body.price
+    });
+  
+    newProduct.save()
+    .then((savedProduct) => {
+
+        //link the product to the department
+        let Department = require('../models/department');
+
+        Department.findById({_id: req.params.id})
+        .then((department) => {
+            department.products.push(savedProduct._id)
+            department.save().then((updatedDepartment) => {
+                res.status(200).json(savedProduct);
+            }, (err) => {
+                res.status(500).json(err);    
+            })
+            
+        }, (err) => {
+            res.status(500).json(err);
+        });
+            
+    }, (err) => {
+        res.status(400).json(err)
+    });
+
+}
+
+module.exports.create = createProduct;

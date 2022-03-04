@@ -33,6 +33,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 
 - Create a Department and link it to a Shop
 - Update a Department
+- Read all the Product for a Department
 
 
 ### Product

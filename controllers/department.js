@@ -1,3 +1,5 @@
+require('../models/product');
+
 function createDepartment(req, res) {
     let Department = require('../models/department');
 
@@ -45,7 +47,19 @@ function updateDepartment(req, res) {
     });
 }
 
+function readProducts(req, res) {
 
+    let Department = require('../models/department');
 
+    Department
+    .findById({ _id: req.params.id })
+    .populate('products')
+    .exec((err, department) => {
+        console.log(department.products);
+        res.status(200).json(department.products);
+    });
+}
+ 
 module.exports.create = createDepartment;
 module.exports.update = updateDepartment;
+module.exports.products = readProducts;

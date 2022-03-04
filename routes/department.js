@@ -15,5 +15,11 @@ router.put('/department/update/:id', (req, res) => {
 
 });
 
+//Read all products from a department
+router.get('/department/products/:id', (req, res) => {
+
+    controller.products(req, res);
+
+});
 
 module.exports = router;

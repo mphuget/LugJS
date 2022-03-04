@@ -15,6 +15,10 @@ let DepartmentSchema = new Schema({
     default : Date.now
   },
   products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
+  retired : {
+    type : Boolean,
+    default : false
+  }
 });
 
 module.exports = mongoose.model('Department', DepartmentSchema);

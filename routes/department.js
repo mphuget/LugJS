@@ -22,4 +22,11 @@ router.get('/department/products/:id', (req, res) => {
 
 });
 
+//Delete a Department
+router.delete('/department/delete/:id', (req, res) => {
+
+    controller.delete(req, res);
+    
+});
+
 module.exports = router;

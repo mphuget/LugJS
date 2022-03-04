@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 require('../models/product');
 
 function createDepartment(req, res) {
@@ -55,11 +57,41 @@ function readProducts(req, res) {
     .findById({ _id: req.params.id })
     .populate('products')
     .exec((err, department) => {
-        console.log(department.products);
         res.status(200).json(department.products);
     });
 }
- 
+
+function deleteDepartment(req, res) {
+
+    let Department = require('../models/department');
+
+    Department    
+    .findById({ _id: req.params.id })
+    .then((department) => {
+
+        for (const product of department.products) {
+            let Product = require('../models/product');
+
+            Product.findByIdAndUpdate({_id: product._id}, 
+                {retired : true},
+                {new : true})
+            .then((updatedProduct) => {
+                
+            });
+        }
+
+        Department.findByIdAndUpdate({_id : req.params.id}, 
+            {retired : true}, 
+            {new : true})
+        .then((department) => {
+            res.status(200).json(department);
+        });
+    });
+
+}
+
 module.exports.create = createDepartment;
 module.exports.update = updateDepartment;
 module.exports.products = readProducts;
+module.exports.delete = deleteDepartment;
+

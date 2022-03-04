@@ -58,7 +58,22 @@ function readProduct(req, res) {
         res.status(500).json(err);
     });
  }
- 
+
+function deleteProduct(req, res) {
+
+    let Product = require('../models/product');
+
+    Product.findByIdAndUpdate({_id: req.params.id}, 
+        {retired : true},
+        {new : true})
+    .then((updatedProduct) => {
+        res.status(200).json(updatedProduct);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports.create = createProduct;
 module.exports.update = updateProduct;
 module.exports.read = readProduct;
+module.exports.delete = deleteProduct;

@@ -22,5 +22,12 @@ router.get('/product/read/:id', (req, res) => {
 
 });
 
+//Delete a Product
+router.delete('/product/delete/:id', (req, res) => {
+
+    controller.delete(req, res);
+
+});
+
 
 module.exports = router;

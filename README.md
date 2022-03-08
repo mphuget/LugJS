@@ -49,7 +49,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 
 - Create a Feedback and link it to the corresponding Product
 - Read a Feedback
-
+- Update a Feedback
 
 ### User authentication 
 

@@ -45,6 +45,19 @@ function readFeedback(req, res) {
 
 }
 
+function updateFeedback(req, res) {
+    let Feedback = require("../models/feedback");
+
+    Feedback.findByIdAndUpdate({_id: req.params.id}, 
+        {content : req.body.content}, 
+        {new : true})
+    .then((updatedFeedback) => {
+        res.status(200).json(updatedFeedback);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports.create = createFeedback;
 module.exports.read = readFeedback;
-
+module.exports.update = updateFeedback;

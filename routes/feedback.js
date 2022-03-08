@@ -15,4 +15,11 @@ router.get('/feedback/read/:id', (req, res) => {
 
 });
 
+//Update a Feedback
+router.put('/feedback/update/:id', (req, res) => {
+
+    controller.update(req, res);
+
+});
+
 module.exports = router;

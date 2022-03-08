@@ -32,4 +32,19 @@ function createFeedback(req, res) {
 
 }
 
+function readFeedback(req, res) {
+
+    let Feedback = require('../models/feedback');
+
+    Feedback.findById({_id : req.params.id})
+    .then((feedback) => {
+        res.status(200).json(feedback);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+
+}
+
 module.exports.create = createFeedback;
+module.exports.read = readFeedback;
+

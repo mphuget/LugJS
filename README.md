@@ -45,6 +45,10 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Read a Product
 - Delete a Product
 
+### Feedback
+
+- Create a Feedback and link it to the corresponding Product
+
 ### User authentication 
 
 - Sign up with a name and a password

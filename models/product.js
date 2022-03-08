@@ -19,7 +19,8 @@ let ProductSchema = new Schema({
   retired : {
       type : Boolean, 
       default : false
-  }
+  },
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Feedback'}],
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

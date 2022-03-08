@@ -22,4 +22,11 @@ router.put('/feedback/update/:id', (req, res) => {
 
 });
 
+//Delete a Feedback
+router.delete('/feedback/delete/:id', (req, res) => {
+
+    controller.delete(req, res);
+
+});
+
 module.exports = router;

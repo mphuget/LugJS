@@ -4,6 +4,7 @@ function createFeedback(req, res) {
     let newFeedback = Feedback ({
         content: req.body.content,
         ownedBy : req.session.userid, 
+        product : req.params.id
     });
   
     newFeedback.save()
@@ -58,6 +59,29 @@ function updateFeedback(req, res) {
     });
 }
 
+function deleteFeedback(req, res) {
+
+    let Feedback = require('../models/feedback');
+
+    Feedback.findByIdAndRemove({_id: req.params.id})
+    .then((deletedFeedback) => {
+
+        let Product = require('../models/product');
+
+        Product.findByIdAndUpdate(deletedFeedback.product, 
+            { $pullAll: { comments: [deletedFeedback._id] } }, 
+            { new: true }, 
+            function(err, data) {
+                res.status(200).json(data);
+            } 
+        );
+        
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports.create = createFeedback;
 module.exports.read = readFeedback;
 module.exports.update = updateFeedback;
+module.exports.delete = deleteFeedback;

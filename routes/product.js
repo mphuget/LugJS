@@ -29,5 +29,4 @@ router.delete('/product/delete/:id', (req, res) => {
 
 });
 
-
 module.exports = router;

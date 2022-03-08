@@ -1,3 +1,5 @@
+require('../models/feedback');
+
 function createProduct(req, res) {
     let Product = require('../models/product');
 
@@ -51,9 +53,12 @@ function readProduct(req, res) {
 
     let Product = require("../models/product");
 
-    Product.find({_id : req.params.id})
+    Product
+    .findById({ _id: req.params.id })
+    .populate('comments')
     .then((product) => {
         res.status(200).json(product);
+
     }, (err) => {
         res.status(500).json(err);
     });

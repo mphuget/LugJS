@@ -31,4 +31,19 @@ function createAnswer(req, res) {
 
 }
 
+function updateAnswer(req, res) {
+    let Answer = require("../models/answer");
+
+    Answer.findByIdAndUpdate({_id: req.params.id}, 
+        {content : req.body.content}, 
+        {new : true})
+    .then((updatedAnswer) => {
+        res.status(200).json(updatedAnswer);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
+
 module.exports.create = createAnswer;
+module.exports.update = updateAnswer;

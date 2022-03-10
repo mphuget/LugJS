@@ -57,6 +57,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Create a Question on a Product
 - Update a Question 
 - Answer a Question
+- Update an Answer
 
 ### User authentication 
 

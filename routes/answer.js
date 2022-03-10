@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const controller = require("../controllers/question");
+const controller = require("../controllers/answer");
 
-//Create a Question
-router.post('/question/create/:id', (req, res) => {
+//Create an Answer
+router.post('/answer/create/:id', (req, res) => {
 
     controller.create(req, res);
 
@@ -17,8 +17,8 @@ router.get('/feedback/read/:id', (req, res) => {
 
 */
 
-//Update a Question
-router.put('/question/update/:id', (req, res) => {
+//Update an Answer
+router.put('/answer/update/:id', (req, res) => {
 
     controller.update(req, res);
 

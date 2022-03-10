@@ -7,6 +7,7 @@ let QuestionSchema = new Schema({
   content : String, 
   ownedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+  answers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Question'}],
   createdAt : {
     type : Date,
     default : Date.now

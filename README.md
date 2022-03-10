@@ -59,6 +59,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Answer a Question
 - Update an Answer
 - Delete an Answer
+- Read a Question
 
 ### User authentication 
 

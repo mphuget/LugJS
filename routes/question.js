@@ -7,15 +7,15 @@ router.post('/question/create/:id', (req, res) => {
     controller.create(req, res);
 
 });
-/*
-//Read a Feedback
-router.get('/feedback/read/:id', (req, res) => {
+
+//Read a Question
+router.get('/question/read/:id', (req, res) => {
 
     controller.read(req, res);
 
 });
 
-*/
+
 
 //Update a Question
 router.put('/question/update/:id', (req, res) => {

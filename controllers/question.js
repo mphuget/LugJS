@@ -1,3 +1,5 @@
+require('../models/answer');
+
 function createQuestion(req, res) {
     let Question = require('../models/question');
 
@@ -46,5 +48,20 @@ function updateQuestion(req, res) {
     });
 }
 
+function readQuestion(req, res) {
+
+    let Question = require('../models/question');
+
+    Question.findById({_id : req.params.id})
+    .populate('answers')
+    .exec((err, data) => {
+        res.status(200).json(data);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+    
+}
+
 module.exports.create = createQuestion;
 module.exports.update = updateQuestion;
+module.exports.read = readQuestion;

@@ -7,15 +7,6 @@ router.post('/answer/create/:id', (req, res) => {
     controller.create(req, res);
 
 });
-/*
-//Read a Feedback
-router.get('/feedback/read/:id', (req, res) => {
-
-    controller.read(req, res);
-
-});
-
-*/
 
 //Update an Answer
 router.put('/answer/update/:id', (req, res) => {
@@ -24,12 +15,12 @@ router.put('/answer/update/:id', (req, res) => {
 
 });
 
-/*
-//Delete a Feedback
-router.delete('/feedback/delete/:id', (req, res) => {
+
+//Delete an Answer
+router.delete('/answer/delete/:question/:id', (req, res) => {
 
     controller.delete(req, res);
 
 });
-*/
+
 module.exports = router;

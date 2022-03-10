@@ -44,6 +44,19 @@ function updateAnswer(req, res) {
     });
 }
 
+function deleteAnswer(req, res) {
+
+    let Question = require('../models/question');
+
+    Question.findByIdAndUpdate(req.params.question, 
+        { $pullAll: { answers: [req.params.id] } }, 
+        { new: true }, 
+        function(err, data) {
+            res.status(200).json(data);
+        } 
+    );
+}
 
 module.exports.create = createAnswer;
 module.exports.update = updateAnswer;
+module.exports.delete = deleteAnswer;

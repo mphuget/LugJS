@@ -15,13 +15,16 @@ router.get('/feedback/read/:id', (req, res) => {
 
 });
 
+*/
+
 //Update a Feedback
-router.put('/feedback/update/:id', (req, res) => {
+router.put('/question/update/:id', (req, res) => {
 
     controller.update(req, res);
 
 });
 
+/*
 //Delete a Feedback
 router.delete('/feedback/delete/:id', (req, res) => {
 

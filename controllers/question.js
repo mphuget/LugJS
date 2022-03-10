@@ -33,5 +33,18 @@ function createQuestion(req, res) {
 
 }
 
-module.exports.create = createQuestion;
+function updateQuestion(req, res) {
+    let Question = require("../models/question");
 
+    Question.findByIdAndUpdate({_id: req.params.id}, 
+        {content : req.body.content}, 
+        {new : true})
+    .then((updatedQuestion) => {
+        res.status(200).json(updatedQuestion);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
+module.exports.create = createQuestion;
+module.exports.update = updateQuestion;

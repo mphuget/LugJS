@@ -52,6 +52,11 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Update a Feedback
 - Delete a Feedback (and inside Product)
 
+### Question
+
+- Create a Question on a Product
+- Update a Question 
+
 ### User authentication 
 
 - Sign up with a name and a password

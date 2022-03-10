@@ -21,6 +21,7 @@ let ProductSchema = new Schema({
       default : false
   },
   comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Feedback'}],
+  questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Question'}],
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

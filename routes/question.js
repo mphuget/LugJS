@@ -24,12 +24,12 @@ router.put('/question/update/:id', (req, res) => {
 
 });
 
-/*
-//Delete a Feedback
-router.delete('/feedback/delete/:id', (req, res) => {
+
+//Delete a Question
+router.delete('/question/delete/:id', (req, res) => {
 
     controller.delete(req, res);
 
 });
-*/
+
 module.exports = router;

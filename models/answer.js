@@ -9,6 +9,10 @@ let AnswerSchema = new Schema({
   createdAt : {
     type : Date,
     default : Date.now
+  },
+  retired: {
+      type: Boolean,
+      default: false
   }
 });
 

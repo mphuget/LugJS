@@ -62,6 +62,44 @@ function readQuestion(req, res) {
     
 }
 
+function deleteQuestion(req, res) {
+
+    let Question = require('../models/question');
+
+    Question.findById({ _id: req.params.id })
+    .then((question) => {
+
+        for (const answer of question.answers) {
+            let Answer = require('../models/answer');
+
+            Answer.findByIdAndUpdate({_id: answer._id}, 
+                {retired : true},
+                {new : true})
+            .then((updatedAnswer) => {
+                
+            });
+        }
+
+        Question.findByIdAndUpdate({_id : req.params.id}, 
+            {retired : true}, 
+            {new : true})
+        .then((deletedQuestion) => {
+
+            let Product = require('../models/product');
+
+            Product.findByIdAndUpdate(deletedQuestion.product, 
+                { $pullAll: { questions: [deletedQuestion._id] } }, 
+                { new: true }, 
+                function(err, data) {
+                    res.status(200).json(data);
+                } 
+            );
+        });
+
+    });}
+
 module.exports.create = createQuestion;
 module.exports.update = updateQuestion;
 module.exports.read = readQuestion;
+module.exports.delete = deleteQuestion;
+

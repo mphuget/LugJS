@@ -8,4 +8,11 @@ router.post('/recommandation/create/:from/:to', (req, res) => {
 
 });
 
+//Delete a Recommandation
+router.delete('/recommandation/delete/:id', (req, res) => {
+
+    controller.delete(req, res);
+
+});
+
 module.exports = router;

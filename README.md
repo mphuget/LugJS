@@ -74,6 +74,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 ### Recommandation
 
 - Link two Product by Recommandation
+- Unlink two Product
 
 ### User authentication 
 

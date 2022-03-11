@@ -17,4 +17,17 @@ function createRecommandation(req, res) {
 
 }
 
+
+function deleteRecommandation(req, res) {
+
+    let Recommandation = require('../models/recommandation');
+    
+    Recommandation.findOneAndRemove({_id : req.params.id})
+    .then((deletedRecommandation) => {
+        res.status(200).json(deletedRecommandation);
+    }, (err) => {
+        res.status(500).json(err);
+    });    
+}
 module.exports.create = createRecommandation;
+module.exports.delete = deleteRecommandation;

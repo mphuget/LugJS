@@ -65,6 +65,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 ### Note
 
 - Create a Note (on a criterion)
+- Update a Note
 
 ### User authentication 
 

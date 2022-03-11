@@ -8,6 +8,13 @@ router.post('/note/create/:id', (req, res) => {
 
 });
 
+//Read all the Note for a Product
+router.get('/note/read/:id', (req, res) => {
+
+    controller.read(req, res);
+
+});
+
 //Update a Note
 router.put('/note/update/:id', (req, res) => {
 

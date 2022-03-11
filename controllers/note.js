@@ -19,6 +19,18 @@ function createNote(req, res) {
 
 }
 
+function readNote(req, res) {
+
+    let Note = require('../models/note');
+
+    Note.find({product: req.params.id})
+    .then((notes) => {
+        res.status(200).json(notes);
+    }, (err) => {
+        res.status(500).json(err);
+    });
+}
+
 function updateNote(req, res) {
     let Note = require("../models/note");
 
@@ -46,6 +58,7 @@ function deleteNote(req, res) {
 }
 
 module.exports.create = createNote;
+module.exports.read = readNote;
 module.exports.update = updateNote;
 module.exports.delete = deleteNote;
 

@@ -67,6 +67,7 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Create a Note (on a criterion)
 - Update a Note
 - Delete a Note
+- Get all the Note for a Product
 
 ### User authentication 
 

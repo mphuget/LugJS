@@ -15,4 +15,11 @@ router.put('/note/update/:id', (req, res) => {
 
 });
 
+//Delete a Note
+router.delete('/note/delete/:id', (req, res) => {
+
+    controller.delete(req, res);
+
+});
+
 module.exports = router;

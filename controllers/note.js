@@ -33,5 +33,19 @@ function updateNote(req, res) {
     });
 }
 
+function deleteNote(req, res) {
+
+    let Note = require('../models/note');
+    
+    Note.findOneAndRemove({_id : req.params.id})
+    .then((deletedNote) => {
+        res.status(200).json(deletedNote);
+    }, (err) => {
+        res.status(500).json(err);
+    });    
+}
+
 module.exports.create = createNote;
 module.exports.update = updateNote;
+module.exports.delete = deleteNote;
+

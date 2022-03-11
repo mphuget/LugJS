@@ -44,6 +44,8 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Update a Product
 - Read a Product (with hydrated Feedback)
 - Delete a Product
+- Add a photo to a Product
+- Delete a photo to a Product
 
 ### Feedback
 

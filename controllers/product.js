@@ -97,9 +97,24 @@ function addPhoto(req, res) {
 
 }
 
+function removePhoto(req, res) {
+
+    let Product = require('../models/product');
+
+    Product.findByIdAndUpdate(req.params.id, 
+        { $pullAll: { photos: [req.body.name] } }, 
+        { new: true }, 
+        function(err, data) {
+            res.status(200).json(data);
+        } 
+    );
+}
+
 module.exports.create = createProduct;
 module.exports.update = updateProduct;
 module.exports.read = readProduct;
 module.exports.delete = deleteProduct;
 module.exports.addPhoto = addPhoto;
+module.exports.removePhoto = removePhoto;
+
 

@@ -33,6 +33,13 @@ router.delete('/product/delete/:id', (req, res) => {
 router.post('/product/photo/add/:id', (req, res) => {
 
     controller.addPhoto(req, res);
+
+});
+
+//Remove a photo
+router.delete('/product/photo/remove/:id', (req, res) => {
+
+    controller.removePhoto(req, res);
     
 });
 

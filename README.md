@@ -76,6 +76,10 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Link two Product by Recommandation
 - Unlink two Product
 
+### Wishlist
+
+- Add a Product to the Wishlist
+
 ### User
 
 - Store which Product the User visits

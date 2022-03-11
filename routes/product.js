@@ -29,4 +29,11 @@ router.delete('/product/delete/:id', (req, res) => {
 
 });
 
+//Add a photo
+router.post('/product/photo/add/:id', (req, res) => {
+
+    controller.addPhoto(req, res);
+    
+});
+
 module.exports = router;

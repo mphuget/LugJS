@@ -22,6 +22,7 @@ let ProductSchema = new Schema({
   },
   comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Feedback'}],
   questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Question'}],
+  photos: [{type: String}],
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

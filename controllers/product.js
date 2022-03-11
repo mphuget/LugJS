@@ -78,7 +78,28 @@ function deleteProduct(req, res) {
     });
 }
 
+function addPhoto(req, res) {
+
+    let Product = require('../models/product');
+
+    Product.findById({_id: req.params.id})
+    .then((product) => {
+        product.photos.push(req.body.name)
+        product.save().then((updatedProduct) => {
+            res.status(200).json(updatedProduct);
+        }, (err) => {
+            res.status(500).json(err);    
+        })
+        
+    }, (err) => {
+        res.status(500).json(err);
+    });
+
+}
+
 module.exports.create = createProduct;
 module.exports.update = updateProduct;
 module.exports.read = readProduct;
 module.exports.delete = deleteProduct;
+module.exports.addPhoto = addPhoto;
+

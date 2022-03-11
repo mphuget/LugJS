@@ -62,6 +62,10 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Read a Question
 - Delete a Question
 
+### Note
+
+- Create a Note (on a criterion)
+
 ### User authentication 
 
 - Sign up with a name and a password

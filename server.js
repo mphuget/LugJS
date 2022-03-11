@@ -156,6 +156,7 @@ const productRoutes = require('./routes/product');
 const feedbackRoutes = require('./routes/feedback');
 const questionRoutes = require('./routes/question');
 const answerRoutes = require('./routes/answer');
+const noteRoutes = require('./routes/note');
 
 //Use the routes
 app.use(userRoutes);
@@ -165,6 +166,7 @@ app.use(productRoutes);
 app.use(feedbackRoutes);
 app.use(questionRoutes);
 app.use(answerRoutes);
+app.use(noteRoutes);
 
 //When there is no route that caught the incoming request
 //use the 404 middleware

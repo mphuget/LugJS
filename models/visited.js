@@ -13,4 +13,3 @@ let VisitedSchema = new Schema({
 });
 
 module.exports = mongoose.model('Visited', VisitedSchema);
-

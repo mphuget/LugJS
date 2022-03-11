@@ -8,4 +8,11 @@ router.post('/visited/create/:id', (req, res) => {
 
 });
 
+//Read all the history
+router.get('/visited/read', (req, res) => {
+
+    controller.read(req, res);
+    
+});
+
 module.exports = router;

@@ -76,6 +76,11 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Link two Product by Recommandation
 - Unlink two Product
 
+### User
+
+- Store which Product the User visits
+- Read all the Product the User visited
+
 ### User authentication 
 
 - Sign up with a name and a password

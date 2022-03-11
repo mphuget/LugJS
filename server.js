@@ -158,6 +158,7 @@ const questionRoutes = require('./routes/question');
 const answerRoutes = require('./routes/answer');
 const noteRoutes = require('./routes/note');
 const recommandationRoutes = require('./routes/recommandation');
+const visitedRoutes = require('./routes/visited');
 
 //Use the routes
 app.use(userRoutes);
@@ -169,6 +170,7 @@ app.use(questionRoutes);
 app.use(answerRoutes);
 app.use(noteRoutes);
 app.use(recommandationRoutes);
+app.use(visitedRoutes);
 
 //When there is no route that caught the incoming request
 //use the 404 middleware

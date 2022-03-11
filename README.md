@@ -71,6 +71,10 @@ Apart from usual actions (sign up/in/out), it is possible to protect routes (see
 - Delete a Note
 - Get all the Note for a Product
 
+### Recommandation
+
+- Link two Product by Recommandation
+
 ### User authentication 
 
 - Sign up with a name and a password

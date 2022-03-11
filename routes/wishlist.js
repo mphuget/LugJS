@@ -8,4 +8,10 @@ router.post('/wishlist/add/:id', (req, res) => {
 
 });
 
+//Remove a Product from the Wishlist
+router.delete('/wishlist/remove/:id', (req, res) => {
+
+    controller.remove(req, res);
+    
+});
 module.exports = router;
